@@ -1,4 +1,4 @@
-# UFO Assignment 1
+# UFO Exercise 1
 In order to look at self reflection and to judge your assessment of information, you should solve the programming exercise below.
 
 However - the important thing in this exercise is how you solved it, not the end result.
