@@ -1,6 +1,16 @@
 # UFO Assignment 1
 
-Question to be investigated
+## Hand-in
+You should hand in the material listed above, and a brief summary of which aspect of the exercise was taking you the longest time to solve, which part of the exercise was side tracking you the most (which dead-ends did you persue), and what was the most helpful information you came across (it could be someone else helping you). How can you avoid those problems in the future, and how can the helpful ressources help you in the future?
+
+Hand-in should be done on Peergrade in self picked groups of size 1-3.
+
+## Review:
+Look at the google queries used by the group you review, and try to compare with your own. In particular, try to find cases where you and your review group was trying to find an answer to the same issue, but where you asked diffrently. Which queries leads to the best result?
+Examine the pages visited by the review group. Find two sites you find trustworthy, and two which you do not find trustworty. Explain why.
+Try to come up with a strategy for the review group which would have overcome their largest stumbling block.
+
+## Question to be investigated
 Steganography is the idea of hiding a message in something.
 
 For example, to hide a message in an image, you can do the following:
