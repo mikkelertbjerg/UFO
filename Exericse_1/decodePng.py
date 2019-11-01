@@ -36,6 +36,25 @@ Managed to store an array of the last digits in each red channel bit, now I have
 should be concatanated. Approaching this as if the ascii code is in oct, which means I should concat every three
 digits into one digit, untill I hit three (null), representing the ending of the message.
 """
+#150-180
+"""
+Turns out what i was collecting was bytes, so now i need to find a way to convert a byte to a bit, in order to extract the last bit in the byte 
+and add that to an array. The question is wether i should check each byte for a corresponding ascii symbol and there by if its 0/null,
+so that i know if the encoded message has been completed.
+"""
+#180-210
+"""
+Figured out a way to convert to bits, and back to bytes. im working on implementing a smart way to check if the byte is = 0 it should break the loop and print
+the converted bytes into ascii and print it out.
+"""
+# 210 - 240
+"""
+I found multiple errors in our previous code, we were reading the pictures pixel in the wrong order. That is to say we were reading on the Y axis first. This has been changed,
+but the output message still makes no sense. Looking up an ascii table, i quickly realized that the ascii table only goes from 0-127, with anything above 127 being mostly
+rubbish letters. Seeing as we have byts going well above 127, its no wonder out output is so bizare. I have no idea why this is, i could venture a guess that the image went through 
+some sort of compressing algorithm when uploaded to the webserver, which would mess with the bytes.
+"""
+
 
 #Queries
 """
@@ -88,12 +107,14 @@ https://www.geeksforgeeks.org/python-ways-to-convert-list-of-ascii-value-to-stri
 https://www.tutorialspoint.com/How-to-convert-an-integer-to-an-ASCII-value-in-Python
 https://stackoverflow.com/questions/25876640/subsampling-every-nth-entry-in-a-numpy-array
 https://www.w3resource.com/python-exercises/python-basic-exercise-27.php
+http://www.asciitable.com/
 """
 
 import imageio
 import matplotlib.pyplot as plt
+import numpy
 
-
+#image has a resolution of 120x77
 pic = imageio.imread('Stego.png')
 #Short test validation
 """
@@ -104,26 +125,53 @@ print(pic[2, 0, 0])
 
 
 #Set up params for the loop
-h = pic.shape[0] #height
-w = pic.shape[1] #width
+h = pic.shape[0] - 1 #height
+w = pic.shape[1] - 1 #width
 
 #Initialize array
 rValues = []
-for x in range(w):
-    for y in range(h):
-        rValues.append(pic[y, x, 0]%10) #%10 to only get the last digit
+#Array with converted bytes
+cValues = []
+# bool to check if we are finished
+done = False
+# Array with Ascii converted from bytes
+words = []
+for x in range(h):
+    if done == True:
+           break
+    for y in range(w):
+        
+        widthArray = pic[x]
+        rbga = widthArray[y]
+        byteR = rbga[0]
+        Bits = numpy.unpackbits(byteR)
+        rValues.append(Bits[7])
+        # we check to see if we have a null byte, if so we end the search.
+        if rValues == [0,0,0,0,0,0,0,0]:
+           for w in cValues:
+              words.append(chr(w))
+           print(words)
+           done = True
+           break
+        if len(rValues) == 8:
+           cValues.append(numpy.packbits(rValues))
+           rValues.clear()
 
+        
+
+        
+        
 #Validate output
 #print(rValues)
 
 asciiValues = []
 asciiValue = ""
 
-for x in 
+# for x in 
 
-result = ""
-for x in rValues:
-    result = result + chr(x)
+# result = ""
+# for x in rValues:
+#     result = result + chr(x)
 
-print(result)
+# print(result)
 
