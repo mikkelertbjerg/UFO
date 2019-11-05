@@ -148,8 +148,8 @@ for x in range(h):
         rValues.append(Bits[7])
         # we check to see if we have a null byte, if so we end the search.
         if rValues == [0,0,0,0,0,0,0,0]:
-           for w in cValues:
-              words.append(chr(w))
+           for z in cValues:
+              words.append(chr(z))
            print(words)
            done = True
            break
